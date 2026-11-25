@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Error · Citafy</title>
+</head>
+<body>
+    <section class="text-center py-5">
+        <h1 class="display-4 fw-bold text-danger">Algo salió mal</h1>
+        <p class="lead">Código de error: <span th:text="${status}">500</span></p>
+        <a th:href="@{/}" class="btn btn-primary">Volver al inicio</a>
+    </section>
+</body>
+</html>
