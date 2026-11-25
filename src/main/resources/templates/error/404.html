@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Página no encontrada · Citafy</title>
+</head>
+<body>
+    <section class="text-center py-5">
+        <h1 class="display-1 fw-bold text-primary">404</h1>
+        <p class="lead">La página que buscas no existe.</p>
+        <a th:href="@{/}" class="btn btn-primary">Volver al inicio</a>
+    </section>
+</body>
+</html>

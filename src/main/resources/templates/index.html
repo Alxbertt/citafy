@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Inicio · Citafy</title>
+</head>
+<body>
+    <section>
+        <div class="p-5 mb-4 bg-white rounded-3 border text-center">
+            <h1 class="display-5 fw-bold">Bienvenido a Citafy</h1>
+            <p class="lead">Gestiona las citas de tu barbería, clínica o salón en un solo lugar.</p>
+            <a th:href="@{/citas}" class="btn btn-primary btn-lg">Ver citas</a>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-3"><a th:href="@{/clientes}" class="card text-decoration-none h-100"><div class="card-body text-center"><h5>Clientes</h5></div></a></div>
+            <div class="col-md-3"><a th:href="@{/profesionales}" class="card text-decoration-none h-100"><div class="card-body text-center"><h5>Profesionales</h5></div></a></div>
+            <div class="col-md-3"><a th:href="@{/servicios}" class="card text-decoration-none h-100"><div class="card-body text-center"><h5>Servicios</h5></div></a></div>
+            <div class="col-md-3"><a th:href="@{/citas}" class="card text-decoration-none h-100"><div class="card-body text-center"><h5>Citas</h5></div></a></div>
+        </div>
+    </section>
+</body>
+</html>
