@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Formulario de profesionales - Citafy</title>
+</head>
+<body>
+<section>
+
+    <h2 class="mb-4"
+        th:text="${idEdicion == null ? 'Nuevo profesional' : 'Editar profesional'}">
+    </h2>
+
+    <div class="card p-4">
+        <form th:action="@{/profesionales/guardar}"
+              th:object="${profesional}" method="post">
+
+            <input th:if="${idEdicion != null}"
+                   type="hidden" name="id" th:value="${idEdicion}">
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" th:field="*{nombre}"
+                       class="form-control" required>
+
+                <div class="text-danger"
+                     th:errors="*{nombre}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Especialidad</label>
+                <input type="text" th:field="*{especialidad}"
+                       class="form-control" required>
+
+                <div class="text-danger"
+                     th:errors="*{especialidad}"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Guardar
+            </button>
+
+            <a th:href="@{/profesionales}" class="btn btn-secondary">
+                Cancelar
+            </a>
+
+        </form>
+    </div>
+
+</section>
+</body>
+</html>
