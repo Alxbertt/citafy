@@ -1,0 +1,46 @@
+<!DO<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Cliente · Citafy</title>
+</head>
+<body>
+<section>
+    <h1 class="h3 mb-3">Cliente</h1>
+
+    <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post"
+          class="card card-body">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" th:field="*{nombre}"
+                   th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}"
+                 th:errors="*{nombre}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="text" class="form-control" th:field="*{telefono}"
+                   th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('telefono')}"
+                 th:errors="*{telefono}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Correo</label>
+            <input type="text" class="form-control" th:field="*{correo}"
+                   th:classappend="${#fields.hasErrors('correo')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('correo')}"
+                 th:errors="*{correo}"></div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a th:href="@{/clientes}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</section>
+</body>
+</html>
