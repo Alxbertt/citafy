@@ -1,0 +1,59 @@
+<nav xmlns:th="http://www.thymeleaf.org"
+     th:fragment="navbar"
+     class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" th:href="@{/}">Citafy</a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                aria-controls="menuPrincipal" aria-expanded="false" aria-label="Menú">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/clientes}"
+                       th:text="${negocioActivo != null ? negocioActivo.etiquetaCliente : 'Clientes'}">
+                        Clientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/profesionales}"
+                       th:text="${negocioActivo != null ? negocioActivo.etiquetaProfesional : 'Profesionales'}">
+                        Profesionales
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/servicios}">Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/citas}">Citas</a>
+                </li>
+            </ul>
+
+            <div id="selector-negocio" th:if="${negocioActivo != null}">
+                <form th:action="@{/negocio/seleccionar}" method="post"
+                      class="d-flex align-items-center gap-2 my-2 my-lg-0">
+                    <label for="tipo-negocio" class="text-white small">
+                        Negocio
+                    </label>
+
+                    <select id="tipo-negocio" name="tipoId"
+                            class="form-select form-select-sm" required>
+                        <option th:each="tipo : ${tiposNegocio}"
+                                th:value="${tipo.id}"
+                                th:text="${tipo.nombre}"
+                                th:selected="${tipo.id == negocioActivo.id}">
+                            Tipo de negocio
+                        </option>
+                    </select>
+
+                    <button type="submit" class="btn btn-sm btn-light">
+                        Aplicar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
