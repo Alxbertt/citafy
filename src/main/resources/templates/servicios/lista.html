@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Servicios · Citafy</title>
+</head>
+<body>
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Servicios</h1>
+        <a th:href="@{/servicios/nuevo}" class="btn btn-primary">Nuevo servicio</a>
+    </div>
+
+    <p class="text-muted" th:if="${negocioActivo != null}">
+        Servicios de: <strong th:text="${negocioActivo.nombre}"></strong>
+    </p>
+
+    <div class="alert alert-success" th:if="${mensaje}" th:text="${mensaje}"></div>
+    <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+
+    <table class="table table-striped table-bordered bg-white">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Duración (min)</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="s : ${servicios}">
+                <td th:text="${s.nombre}"></td>
+                <td th:text="${s.duracionMinutos}"></td>
+                <td th:text="${#numbers.formatDecimal(s.precio, 1, 2)}"></td>
+                <td>
+                    <a class="btn btn-sm btn-outline-primary"
+                       th:href="@{/servicios/editar/{id}(id=${s.id})}">Editar</a>
+                    <form class="d-inline" method="post"
+                          th:action="@{/servicios/eliminar/{id}(id=${s.id})}">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
