@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Nueva cita · Citafy</title>
+</head>
+<body>
+<section>
+    <h1 class="h3 mb-3">Nueva cita</h1>
+
+    <form th:action="@{/citas/guardar}" th:object="${cita}" method="post"
+          class="card card-body">
+
+        <div class="mb-3">
+            <label class="form-label">Cliente</label>
+            <select name="cliente" class="form-select"
+                    th:classappend="${#fields.hasErrors('cliente')} ? 'is-invalid'">
+                <option value="">Seleccione un cliente</option>
+                <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nombre}"
+                        th:selected="${cita.cliente != null and cita.cliente.id == c.id}"></option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('cliente')}"
+                 th:errors="*{cliente}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Profesional</label>
+            <select name="profesional" class="form-select"
+                    th:classappend="${#fields.hasErrors('profesional')} ? 'is-invalid'">
+                <option value="">Seleccione un profesional</option>
+                <option th:each="p : ${profesionales}" th:value="${p.id}" th:text="${p.nombre}"
+                        th:selected="${cita.profesional != null and cita.profesional.id == p.id}"></option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('profesional')}"
+                 th:errors="*{profesional}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Servicio</label>
+            <select name="servicio" class="form-select"
+                    th:classappend="${#fields.hasErrors('servicio')} ? 'is-invalid'">
+                <option value="">Seleccione un servicio</option>
+                <option th:each="s : ${servicios}" th:value="${s.id}" th:text="${s.nombre}"
+                        th:selected="${cita.servicio != null and cita.servicio.id == s.id}"></option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('servicio')}"
+                 th:errors="*{servicio}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Fecha y hora</label>
+            <input type="datetime-local" class="form-control" th:field="*{fechaHora}"
+                   th:classappend="${#fields.hasErrors('fechaHora')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaHora')}"
+                 th:errors="*{fechaHora}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Notas (opcional)</label>
+            <textarea class="form-control" th:field="*{notas}" rows="2"></textarea>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Agendar</button>
+            <a th:href="@{/citas}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</section>
+</body>
+</html>
