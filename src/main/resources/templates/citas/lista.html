@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Citas · Citafy</title>
+</head>
+<body>
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Citas</h1>
+        <a th:href="@{/citas/nueva}" class="btn btn-primary">Nueva cita</a>
+    </div>
+
+    <div class="alert alert-success" th:if="${mensaje}" th:text="${mensaje}"></div>
+
+    <table class="table table-striped table-bordered bg-white">
+        <thead>
+            <tr>
+                <th>Fecha y hora</th>
+                <th>Cliente</th>
+                <th>Profesional</th>
+                <th>Servicio</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${citas}">
+                <td th:text="${#temporals.format(c.fechaHora, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${c.cliente.nombre}"></td>
+                <td th:text="${c.profesional.nombre}"></td>
+                <td th:text="${c.servicio.nombre}"></td>
+                <td th:text="${c.estado}"></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
